@@ -70,9 +70,10 @@ level_2_robots = [
 
 # Level 3 Boss Tier AI Configurations
 level_3_robots = [
-    [pygame.Rect(0, 190, 30, 10), 4.0, (0, 255, 220), "Sweeper", 1, "Copilot"],      # Sweeps a platform back & forth
-    [pygame.Rect(720, 400, 24, 24), 0.8, (255, 100, 0), "Boomer", 0, "Perplexity"],  # Speeds up as it gets close
-    [pygame.Rect(580, 380, 44, 58), 0.7, (255, 255, 255), "Shover", 0, "OpenAI"]
+    [pygame.Rect(0, 190, 30, 10), 4.0, (0, 255, 220), "Sweeper", 1, "Copilot"], 
+    [pygame.Rect(720, 400, 24, 24), 0.8, (255, 100, 0), "Boomer", 0, "Perplexity"], 
+    [pygame.Rect(580, 380, 44, 58), 0.7, (255, 255, 255), "Shover", 0, "OpenAI"],
+    [pygame.Rect(280, 80, 24, 24), 0.9, (255, 105, 180), "Boomer", 0, "Gemma"]
 ]
 
 robots = level_1_robots
@@ -137,7 +138,9 @@ def respawn_player():
     robots[2][0].x = 580
     robots[2][0].y = 380 if current_level == 3 else (395 if current_level == 2 else 390)
     
-
+    if len(robots) > 3:
+        robots[3][0].x = 280
+        robots[3][0].y = 80
     spawn_items()
 
 # collision
@@ -299,11 +302,14 @@ while True:
             pygame.draw.rect(screen, (0, 180, 255), (player.x + 4, player.y + 28, 5, 12))
             pygame.draw.rect(screen, (0, 180, 255), (player.x + 15, player.y + 28, 5, 12))
 
-        # ai Robot Logic
-         # ai Robot Logic
-        for robot_data in robots:
-            bot, speed, color, bot_type, bot_vy, bot_name = robot_data
 
+        if 'boomer_directions' not in globals() and 'boomer_directions' not in locals():
+            global boomer_directions
+            boomer_directions = {}
+
+        # ai Robot Logic
+        for idx, robot_data in enumerate(robots):
+            bot, speed, color, bot_type, bot_vy, bot_name = robot_data[:6]
             old_x = bot.x
             bot_grounded = False
 
@@ -311,60 +317,75 @@ while True:
                 bot.x += speed * bot_vy
                 if bot.right > WIDTH or bot.left < 0:
                     bot_vy *= -1
-                for plat in platforms:
-                    if bot.colliderect(plat):
-                        if bot.right > plat.right or bot.left < plat.left:
-                            bot_vy *= -1
 
             elif bot_type == "Boomer":
+                bot_id = id(robot_data)
+                if bot_id not in boomer_directions:
+                    boomer_directions[bot_id] = 1
+                roam_dir = boomer_directions[bot_id]
+                
+                #calculate distance to player
                 dx = player.x - bot.x
                 dy = player.y - bot.y
-                dist = math.sqrt(dx**2 + dy**2)
-                current_speed = speed
-                if dist < 150:
+                distance = math.sqrt(dx**2 + dy**2)
+                
+                if distance < 160:
+                    # Chase mode
                     current_speed = speed * 2.5
-                if bot.x < player.x:
-                    bot.x += current_speed
+                    if bot.x < player.x:
+                        bot.x += current_speed
+                        boomer_directions[bot_id] = 1
+                    else:
+                        bot.x -= current_speed
+                        boomer_directions[bot_id] = -1
                 else:
-                    bot.x -= current_speed
+                    # patrol
+                    bot.x += speed * roam_dir
+                    
+                    # boundaries
+                    if bot.right > WIDTH:
+                        bot.right = WIDTH
+                        boomer_directions[bot_id] = -1
+                    elif bot.left < 0:
+                        bot.left = 0
+                        boomer_directions[bot_id] = 1
+                        
+                    if bot.x == old_x and bot_grounded:
+                        boomer_directions[bot_id] *= -1
+
+                
                 bot_vy += 0.65
                 bot.y += bot_vy
                 bot_vy, bot_grounded = handle_y_collision(bot, bot_vy, platforms)
 
             elif bot_type == "Stalker":
-                # Safe hover tracking logic branch
-                if bot.x < player.x:
-                    bot.x += speed
-                else:
-                    bot.x -= speed
-                if bot.y < player.y - 40:
-                    bot.y += 1
-                elif bot.y > player.y - 40:
-                    bot.y -= 1
+                
+                bot.x += speed if bot.x < player.x else -speed
+                if bot.y < player.y - 40: bot.y += 2
+                elif bot.y > player.y - 40: bot.y -= 2
 
             else:
-                # Regular runner/shover ground pathing
-                if bot.x < player.x:
-                    bot.x += speed
-                else:
-                    bot.x -= speed
+                
+                bot.x += speed if bot.x < player.x else -speed
                 bot_vy += 0.65
                 bot.y += bot_vy
                 bot_vy, bot_grounded = handle_y_collision(bot, bot_vy, platforms)
 
-            # Process high jumping mechanics for walking units
+            
             jump_threshold = 40 if current_level == 3 else 30
             if bot_grounded and (bot.x == old_x or player.y < bot.y - jump_threshold):
                 bot_vy = -12.5 if current_level == 3 else -11.0
                 bot_grounded = False
 
-            robot_data[4] = bot_vy
+            
+            robots[idx][4] = bot_vy
 
 
 
 
 
-            # Enhanced level 3 vertical jumping trigger AI nodes
+
+            
             jump_threshold = 40 if current_level == 3 else 30
             if bot_grounded and (bot.x == old_x or player.y < bot.y - jump_threshold):
                 bot_vy = -12.5 if current_level == 3 else -11.0  # Bosses jump significantly higher!
