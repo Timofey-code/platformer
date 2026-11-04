@@ -13,7 +13,17 @@ Are you ready to play? You might want to read further first.
 
 ## How to use?
 
-Usable on VS code or 
+Usable on VS code - make sure you have installed the official Python library, and press the "play" button.
+
+Launch via terminal (python run) - 1. Download or save the code into a file named platformer.py inside your preferred folder.
+
+2. Open your terminal/command prompt and navigate (cd) to that folder.
+
+3. Launch the game by typing:
+```bash
+python platformer.py
+```
+
 
 ## Startup
 
