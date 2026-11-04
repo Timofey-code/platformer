@@ -23,6 +23,7 @@ Launch via terminal (python run) - 1. Download or save the code into a file name
 ```bash
 python platformer.py
 ```
+(Note: Depending on your system installation, you might need to type python3 platformer.py instead).
 
 
 ## Startup
@@ -37,3 +38,15 @@ For Mac/Linux:
 ```bash
 pip3 install pygame
 ```
+
+## Controls
+*   **`A`** — Move Left
+*   **`D`** — Move Right
+*   **`W`** — Jump
+*   **`ENTER`** — Start Game / Restart Game after Ultimate Victory
+*   **`SPACEBAR`** — Respawn & retry current level after a System Failure (game over)
+
+ ## Mechanics (For Developers)
+ **State Matrix Router:** Level transitions dynamically hot-swap platform layouts, item quotas, and AI robot configurations seamlessly without reloading resources.
+**AABB Collisions:** Custom axis-aligned bounding box collision routines handle platform grounding, vertical ceiling blocks, and pixel-precise coordinate resets.
+**Dynamic Difficulty Scaling:** As you progress to higher levels, enemy jumping thresholds are lowered and boss velocities are adjusted to drastically increase tracking efficiency.
