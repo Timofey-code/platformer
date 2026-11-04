@@ -10,3 +10,20 @@ There are many types of them - stalkers, sweepers, boomers, shovers, runners... 
 Do not worry, for if your system is corrupted, or files deleted by the AIs, you will respawn by being cloned on the same level. 
 
 Are you ready to play? You might want to read further first.
+
+## How to use?
+
+Usable on VS code or 
+
+## Startup
+
+Before starting, you will need to run an install.
+For windows:
+```bash
+pip install pygame
+```
+
+For Mac/Linux:
+```bash
+pip3 install pygame
+```
