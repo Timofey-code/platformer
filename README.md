@@ -1,5 +1,8 @@
 ## Bot Outrun Platformer!
+Created by Timofey-code.
 Welcome to Bot Outrun Simulator, where you have to collect items to build a PC! Traverse 3 levels with different terrain.
+This is a fun little game that you can play when bored, and try to get the lowest time possible. The sprites and decoration are very simple, however the gameplay itself is very addicting, and the more you play, the better you get!
+
 
 BUT... it isn't that easy...
 
@@ -71,7 +74,7 @@ pip3 install pygame
 
 
 ## Платформер побега от роботов!
-Добро пожаловать в Симулятор побега от роботов (Bot Outrun Simulator), где вам предстоит собирать 
+Добро пожаловать в  платформер побега от роботов (Bot Outrun Simulator), где вам предстоит собирать 
 предметы, чтобы собрать компьютер! Пройдите 3 уровня чтобы победить.
 
 НО... все не так просто...
