@@ -1,4 +1,4 @@
-## Bot Outrun Simulator!
+## Bot Outrun Platformer!
 Welcome to Bot Outrun Simulator, where you have to collect items to build a PC! Traverse 3 levels with different terrain.
 
 BUT... it isn't that easy...
@@ -39,6 +39,18 @@ For Mac/Linux:
 pip3 install pygame
 ```
 
+## Gameplay Features
+*   **3 Unique Levels:** From basic floor structures to a highly vertical, complex platform grid.
+*   **Specialized AI Enemy Archetypes:**
+    *   `Runner` (ChatGPT & DeepSeek): Fast, direct ground pursuers.
+    *   `Stalker` (Gemini & Claude): Levitating bots that track your altitude.
+    *   `Shover` (Grok, Qwen, & OpenAI): Heavy, tank-like obstacles.
+    *   `Boomer` (Perplexity & Gemma): Patrolling proximity bots that pulse and sprint when you get close.
+    *   `Sweeper` (Copilot): High-speed, level 3 exclusive platform hazard.
+*   **PC Building Progression:** Collect vital components (`RAM`, `Mouse`, `Keyboard`, `CPU`, `GPU`, `SSD`) to hit your target quota and unlock the next stage.
+*   **Dynamic Visuals:** Procedural leg animations for the player, color-coded AI tags, and dedicated matrix-style overlay screens for "System Failures" and "Humanity Preserved" victories.
+
+
 ## Controls
 *   **`A`** — Move Left
 *   **`D`** — Move Right
@@ -47,6 +59,80 @@ pip3 install pygame
 *   **`SPACEBAR`** — Respawn & retry current level after a System Failure (game over)
 
  ## Mechanics (For Developers)
+ 
  **State Matrix Router:** Level transitions dynamically hot-swap platform layouts, item quotas, and AI robot configurations seamlessly without reloading resources.
-**AABB Collisions:** Custom axis-aligned bounding box collision routines handle platform grounding, vertical ceiling blocks, and pixel-precise coordinate resets.
-**Dynamic Difficulty Scaling:** As you progress to higher levels, enemy jumping thresholds are lowered and boss velocities are adjusted to drastically increase tracking efficiency.
+ 
+**Collisions:** Custom axis-aligned bounding box collision routines handle platform grounding, vertical ceiling blocks, and pixel-precise coordinate resets.
+
+**Difficulty Scaling:** As you progress to higher levels, enemy jumping thresholds are lowered and boss velocities are adjusted to drastically increase tracking efficiency.
+
+
+
+
+
+## Платформер побега от роботов!
+Добро пожаловать в Симулятор побега от роботов (Bot Outrun Simulator), где вам предстоит собирать комплектующие, чтобы собрать ПК! Пройдите 3 уровня с различным ландшафтом.
+
+НО... все не так просто...
+
+На каждом уровне вас ждут 3 ИИ-робота, запрограммированных выследить вас любой ценой! Однако на 3-м уровне появляется 1 дополнительный робот-бумер, так что на самом сложном этапе против вас выступят уже 4 машины.
+
+Здесь много разных типов врагов: преследователи, зачищики, бумеры, толкатели, бегуны... и этот список можно продолжить. Каждый из них обладает уникальной механикой, что делает игру гораздо более сложной и увлекательной!
+
+Не волнуйтесь: если ваша система будет повреждена или ИИ удалит файлы, вы возродитесь на том же уровне в виде клона.
+
+Готовы к игре? Возможно, сначала стоит прочитать руководство ниже.
+
+## Как запустить?
+
+Запуск через VS Code — убедитесь, что у вас установлено официальное расширение Python, и нажмите кнопку «Play» (Запуск) ▶ в верхнем правом углу.
+
+Запуск через терминал — 1. Скачайте или сохраните код в файл с именем platformer.py в выбранную вами папку.
+
+2. Откройте терминал/командную строку и перейдите (`cd`) в эту папку.
+
+3. Запустите игру, введя команду:
+```bash
+python platformer.py
+```
+*(Примечание: в зависимости от настроек вашей системы, вместо этого может потребоваться ввести `python3 platformer.py`).*
+
+## Подготовка к запуску
+
+Перед началом игры необходимо установить зависимость.
+Для Windows:
+```bash
+pip install pygame
+```
+
+Для Mac/Linux:
+```bash
+pip3 install pygame
+```
+
+## Особенности игрового процесса
+*   **3 уникальных уровня:** от базовых напольных платформ до сложной вертикальной сетки.
+*   **Специализированные архетипы ИИ-врагов:**
+    *   `Runner` / Бегун (ChatGPT и DeepSeek): быстрые наземные преследователи, движущиеся напролом.
+    *   `Stalker` / Преследователь (Gemini и Claude): парящие роботы, отслеживающие вашу высоту.
+    *   `Shover` / Толкатель (Grok, Qwen и OpenAI): тяжелые роботы-танки, служащие препятствием.
+    *   `Boomer` / Бумер (Perplexity и Gemma): патрульные роботы, которые начинают пульсировать и ускоряться при вашем приближении.
+    *   `Sweeper` / Зачищик (Copilot): высокоскоростная угроза, уникальная для 3-го уровня.
+*   **Сборка ПК:** собирайте ключевые компоненты (`RAM`, `Mouse`, `Keyboard`, `CPU`, `GPU`, `SSD`), чтобы выполнить норму и открыть следующий этап.
+*   **Динамическая графика:** процедурная анимация ног игрока, цветовая кодировка названий ИИ и стилизованные под «Матрицу» экраны для системных сбоев («System Failure») и победы человечества («Humanity Preserved»).
+
+## Управление
+*   **`A`** — Движение влево
+*   **`D`** — Движение вправо
+*   **`W`** — Прыжок
+*   **`ENTER`** — Начать игру / Перезапустить игру после абсолютной победы
+*   **`SPACEBAR` (Пробел)** — Возродиться и переиграть текущий уровень после системного сбоя (Game Over)
+
+## Механики (Для разработчиков)
+ 
+**Маршрутизатор матрицы состояний (State Matrix Router):** переходы между уровнями динамически и бесшовно меняют схемы платформ, нормы предметов и конфигурации ИИ-роботов без перезагрузки ресурсов.
+ 
+**Коллизии AABB:** кастомные алгоритмы столкновения по оси (axis-aligned bounding box) отвечают за приземление на платформы, вертикальные блоки потолка и сброс координат с пиксельной точностью.
+
+**Динамическое масштабирование сложности:** по мере продвижения на более высокие уровни порог прыжков врагов снижается, а скорость боссов корректируется, что значительно повышает эффективность их слежки за игроком.
+
