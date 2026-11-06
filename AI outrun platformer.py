@@ -58,17 +58,17 @@ player = pygame.Rect(100, 380, 24, 40)
 #robot setup
 level_1_robots = [
     [pygame.Rect(720, 400, 24, 30), 1.3, (255, 50, 50), "Runner", 0, "ChatGPT"],   
-    [pygame.Rect(650, 280, 24, 24), 0.8, (180, 50, 255), "Stalker", 0, "Gemini"],  
+    [pygame.Rect(650, 280, 24, 24), 1.8, (180, 50, 255), "Stalker", 0, "Gemini"],  
     [pygame.Rect(580, 390, 36, 45), 0.5, (255, 130, 0), "Shover", 0, "Grok"]       
 ]
 
 level_2_robots = [
-    [pygame.Rect(720, 400, 22, 28), 1.9, (50, 255, 255), "Runner", 0, "DeepSeek"],  
+    [pygame.Rect(720, 400, 22, 28), 2.9, (50, 255, 255), "Runner", 0, "DeepSeek"],  
     [pygame.Rect(650, 200, 24, 24), 1.1, (255, 100, 100), "Stalker", 0, "Claude"],  
     [pygame.Rect(580, 395, 30, 40), 0.6, (50, 255, 50), "Shover", 0, "Qwen"]  
 ]
 
-# Level 3 Boss Tier AI Configurations
+# Level 3 Boss 
 level_3_robots = [
     [pygame.Rect(0, 190, 30, 10), 4.0, (0, 255, 220), "Sweeper", 1, "Copilot"], 
     [pygame.Rect(720, 400, 24, 24), 0.8, (255, 100, 0), "Boomer", 0, "Perplexity"], 
@@ -101,9 +101,9 @@ def spawn_items():
     if current_level == 1:
         items_needed = 5
     elif current_level == 2:
-        items_needed = 6
-    elif current_level == 3:
         items_needed = 8
+    elif current_level == 3:
+        items_needed = 10
 spawn_items()
 
 # physics
@@ -169,7 +169,7 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 if not game_started or game_won:
-                    # Global full game reset architecture on restart request
+                    
                     current_level = 1
                     platforms = level_1_platforms
                     robots = level_1_robots
