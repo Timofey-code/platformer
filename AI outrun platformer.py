@@ -58,7 +58,7 @@ player = pygame.Rect(100, 380, 24, 40)
 #robot setup
 level_1_robots = [
     [pygame.Rect(720, 400, 24, 30), 1.3, (255, 50, 50), "Runner", 0, "ChatGPT"],   
-    [pygame.Rect(650, 280, 24, 24), 1.8, (180, 50, 255), "Stalker", 0, "Gemini"],  
+    [pygame.Rect(650, 280, 24, 24), 1.5, (180, 50, 255), "Stalker", 0, "Gemini"],  
     [pygame.Rect(580, 390, 36, 45), 0.5, (255, 130, 0), "Shover", 0, "Grok"]       
 ]
 
@@ -72,7 +72,7 @@ level_2_robots = [
 level_3_robots = [
     [pygame.Rect(0, 190, 30, 10), 4.0, (0, 255, 220), "Sweeper", 1, "Copilot"], 
     [pygame.Rect(720, 400, 24, 24), 0.8, (255, 100, 0), "Boomer", 0, "Perplexity"], 
-    [pygame.Rect(580, 380, 44, 58), 0.7, (255, 255, 255), "Shover", 0, "OpenAI"],
+    [pygame.Rect(580, 380, 44, 58), 0.9, (255, 255, 255), "Shover", 0, "OpenAI"],
     [pygame.Rect(280, 80, 24, 24), 0.9, (255, 105, 180), "Boomer", 0, "Gemma"]
 ]
 
@@ -117,7 +117,7 @@ game_over = False
 game_won = False  # Track ultimate win state
 walk_frame = 0.0
 
-# Level-Aware Respawn Function
+# Respawn for level
 def respawn_player():
     global player, robots, platforms, items_collected, player_vy, player_grounded, game_over, score, saved_score
     
@@ -193,9 +193,9 @@ while True:
         screen.blit(instr_txt, (WIDTH // 2 - instr_txt.get_width() // 2, 300))
 
     elif game_won:
-        # ULTIMATE VICTORY END SCREEN WINDOW OVERLAY
+        # VICTORY 
         overlay = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
-        overlay.fill((10, 35, 20, 230))  # Emerald digital tint matrix filter
+        overlay.fill((10, 35, 20, 230))  
         screen.blit(overlay, (0, 0))
         
         win_title = font.render("HUMANITY PRESERVED: ESCAPE SUCCESSFUL", True, (0, 255, 150))
